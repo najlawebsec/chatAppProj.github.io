@@ -4,17 +4,17 @@
 }
 
 body {
-  background: #C5DDEB;
-  font: 14px/20px "Lato", Arial, sans-serif;
-  padding: 40px 0;
-  color: white;
+  background: #C5DDEB !important;
+  font: 14px/20px "Lato", Arial, sans-serif !important;
+  padding: 40px 0 !important;
+  color: white !important;
 }
 
 .after_login {
   display: none;
 }
 
-.container {
+.container2 {
   margin: 0 auto;
   width: 750px;
   background: #444753;
@@ -400,6 +400,24 @@ body {
   font-weight: bold;
 }
 .creatAccount:hover {
+  color: #1a5d9b;
+}
+
+.restpass {
+  color: #3d90de;
+  cursor: pointer;
+  font-weight: bold;
+}
+.restpass:hover {
+  color: #1a5d9b;
+}
+
+.creatGroup {
+  color: #3d90de;
+  cursor: pointer;
+  font-weight: bold;
+}
+.creatGroup:hover {
   color: #1a5d9b;
 }
 
