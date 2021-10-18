@@ -1039,6 +1039,7 @@ var clickHandlerSpecificGroupChat = async function (evt) {
                 })
         })
     })
+    $('.GroupList').append(`<div> Group Members: </div>`);
     members.forEach(function (item) {
         var memberinfo = rtdb.ref(db, `/users/${item}`);
         rtdb.onValue(memberinfo, uu => {
