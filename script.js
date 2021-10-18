@@ -248,7 +248,10 @@ let renderLogout = function(userObj){
     document.getElementById("after_login").style.display = "none";
     admin = false;
     groupChat = true;
-    
+    receiver_id = "none";
+    $(".chat-num-messages").html("Group Chat");
+    $(".groupChat").hide();
+    $(".list").show();
     //$("#list").empty();
     fbauth.signOut(auth);
     //$("#list").empty();
@@ -925,7 +928,6 @@ $('.createNewGroup').on('click', function () {
 
 var clickHandlerSpecificGroupChat = async function (evt) {
     $(".list").hide();
-  $(".gropuMrmbers").hide();
     $('.GroupList').find('.member').remove();
     let clickedElement = evt.currentTarget;
     let groupId = $(clickedElement).attr("data-groupnode");
@@ -943,15 +945,15 @@ var clickHandlerSpecificGroupChat = async function (evt) {
             $(".chat-num-messages").append('<div>Group name: ' + groupname + '  <a class="deleteGroup" style="cursor:pointer;" data-groupid="' + groupId + '">Delete Group</a></div>');
         }
         else {
-            $(".chat-num-messages").append('<div>Group name: ' + groupname + ' <a class="deleteGroup" style="cursor:pointer;" data-groupid="' + groupId + '">Delete Group</a></div>');
+            $(".chat-num-messages").append('<div>Group name: ' + groupname + '<a class="leaveGroup" style="cursor:pointer;margin-left: 9px;" data-groupid="' + groupId + '">Leave Group</a></div>');
         }
         members = ss.val().members;
         members.push(groupowner);
         if (groupowner == currentUserUid) {
-            $(".chat-num-messages").append('<div class="membersAppend"><h5></h5><a class="addMembers" style="cursor:pointer;" data-groupid="' + groupId + '">Add Members</a><div class="row" id="membersAppend"></div></div>');
+            $(".chat-num-messages").append('<div class="membersAppend"><a class="addMembers" style="cursor:pointer;" data-groupid="' + groupId + '">Add Members</a></div>');
         }
         else {
-            $(".chat-num-messages").append('<div class="membersAppend"><h5></h5><div class="row" id="membersAppend"></div></div>');
+            
         }
         $(".groupChat").click(clickHandlerGroupChat);
         $('.deleteGroup').on('click', async function () {
@@ -1370,7 +1372,7 @@ $('.inviteNewMembers').on('click', async function () {
             }
         });
     })
-    $('.deleteMember').on('click', async function () {
+     $('.deleteMember').on('click', async function () {
         var id = $(this).attr('data-deletemember');
         var group = $(this).attr('data-group');
         let groupRef = rtdb.ref(db, "/groups/" + group);
@@ -1381,6 +1383,10 @@ $('.inviteNewMembers').on('click', async function () {
             var index = members.indexOf(id);
             members.splice(index, 1);
         });
+        if(members.length == 0){
+          alert("if you delete this member there will be no more members left in the group. Rather than deleting member delete the group.")
+          return false;
+        }
         rtdb.update(groupRef, {
             members: members,
         })
