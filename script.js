@@ -192,7 +192,7 @@ $("#login").on("click", ()=>{
       $(".chat-num-messages").html("Group Chat");
       //alert(somedata.user);
       //renderCurrentUser(somedata.user);
-      
+        //renderUser(userObjGlobal);
       
     }).catch(function(error) {
       // Handle Errors here.
@@ -331,16 +331,16 @@ let renderUser = function(userObj){
   let currentUserUidOut = currentUserUid2.replace(/"/g, '');
   currentUserUid = currentUserUidOut;
   
-  rtdb.onValue(userRef, ss=>{
+  rtdb.onValue(userRef, ss=>{  
     $(".list").empty();
    let usersObj = ss.val();
    let theIds = Object.keys(usersObj);
       theIds.map((anId)=>{
         let userObjj = usersObj[anId];
-
+        
         if(userObjj.roles.admin == true){
+          
           if(userObjj.online == true){
-      
           $(".list").append(`<li class="clearfix">
               <img src="" alt="" />
               <div class="about" data-id-listName1=${anId}>
@@ -369,6 +369,7 @@ let renderUser = function(userObj){
       }             
         else{
           if(userObjj.online == true){
+            
           $(".list").append(`<li class="clearfix">
               <img src="" alt="" />
               <div class="about" data-id-listName1=${anId}>
@@ -382,6 +383,7 @@ let renderUser = function(userObj){
           }
           else
             {
+             
               $(".list").append(`<li class="clearfix">
               <img src="" alt="" />
               <div class="about" data-id-listName1=${anId}>
@@ -396,6 +398,7 @@ let renderUser = function(userObj){
           if (admin == false)
           $(".changeRole").hide();
         }
+        
     
         $(`[data-id-listName=${anId}]`).click(clickHandlerSpecificChat);
         //$(`[data-id-listName1=${anId}]`).click(clickHandlerSpecificChat);
@@ -722,7 +725,8 @@ var clickHandlerGroupChat = function(evt){
   $(".chat-num-messages").html("Group Chat");
   $(".groupChat").hide();
   
-  renderChats(userObjGlobal); 
+  renderChats(userObjGlobal);
+  //renderUser(userObjGlobal); 
 }
 
 var getCurrentTime = function(){
@@ -820,11 +824,13 @@ var clickHandlergroupsChat = function(evt){
           $(".groupChat").click(clickHandlerGroupChat);         
         })
   //alert(receiver_id);
+  //$(".gropuMrmbers").hide();
   renderChats(userObjGlobal); 
 }
 
 var clickHandlerGroupChat = function(evt){
   
+  $(".gropuMrmbers").hide();
   groupChat = true;
   receiver_id = "none";
   $(".chat-num-messages").html("Group Chat");
@@ -919,6 +925,7 @@ $('.createNewGroup').on('click', function () {
 
 var clickHandlerSpecificGroupChat = async function (evt) {
     $(".list").hide();
+  $(".gropuMrmbers").hide();
     $('.GroupList').find('.member').remove();
     let clickedElement = evt.currentTarget;
     let groupId = $(clickedElement).attr("data-groupnode");
@@ -1039,7 +1046,7 @@ var clickHandlerSpecificGroupChat = async function (evt) {
                 })
         })
     })
-    $('.GroupList').append(`<div> Group Members: </div>`);
+  $('.GroupList').append(`<div class="gropuMrmbers"> Group Members: </div>`);
     members.forEach(function (item) {
         var memberinfo = rtdb.ref(db, `/users/${item}`);
         rtdb.onValue(memberinfo, uu => {
@@ -1323,7 +1330,7 @@ $('.inviteNewMembers').on('click', async function () {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-offline">
+                            <div class="status-online">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                           </div>
@@ -1349,7 +1356,7 @@ $('.inviteNewMembers').on('click', async function () {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-offline">
+                            <div class="status-online">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                             <button class="deleteMember" type="button" data-group="${groupId}" data-deletemember="${item}">Delete</button>
