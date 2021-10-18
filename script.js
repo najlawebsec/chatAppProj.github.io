@@ -1060,7 +1060,7 @@ var clickHandlerSpecificGroupChat = async function (evt) {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-online">
+                            <div class="status-offline">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                           </div>
@@ -1086,7 +1086,7 @@ var clickHandlerSpecificGroupChat = async function (evt) {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-online">
+                            <div class="status-offline">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                             <button class="deleteMember" type="button" data-group="${groupId}" data-deletemember="${item}">Delete</button>
@@ -1113,7 +1113,7 @@ var clickHandlerSpecificGroupChat = async function (evt) {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-online">
+                            <div class="status-offline">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                           </div>
@@ -1322,7 +1322,7 @@ $('.inviteNewMembers').on('click', async function () {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-online">
+                            <div class="status-offline">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                           </div>
@@ -1348,7 +1348,7 @@ $('.inviteNewMembers').on('click', async function () {
                           <img src="" alt="" />
                           <div class="about" data-id-listName1=${item}>
                             <div class="name" data-id-listName=${item}>${uu.val().name}</div>
-                            <div class="status-online">
+                            <div class="status-offline">
                               <i class="fa fa-circle offline"></i> offline
                             </div>
                             <button class="deleteMember" type="button" data-group="${groupId}" data-deletemember="${item}">Delete</button>
